@@ -1,0 +1,13 @@
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: sdcore-4g
+  namespace: fleet-default
+spec:
+  repo: https://github.com/hyunsun/aether-configs
+  branch: main
+  paths:
+    - app/cassandra
+    - app/sd-core-4g
+  targets:
+    - clusterSelector: {}

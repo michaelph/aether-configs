@@ -1,0 +1,24 @@
+image:
+  credential: false
+
+stratum:
+  image:
+    repository: registry.opennetworking.org/docker.io/stratumproject/stratum-bfrt
+
+  nodeSelector:
+    node-role.aetherproject.org: switch
+
+  tolerations:
+    - effect: NoSchedule
+      value: switch
+      key: node-role.aetherproject.org
+
+  podsecuritypolicy:
+    enabled: false
+  external_chassis_config: true
+
+import:
+  onos-classic:
+    enabled: false
+  pfcp-agent:
+    enabled: false

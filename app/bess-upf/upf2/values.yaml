@@ -1,0 +1,25 @@
+servicemonitor:
+  enabled: true
+
+config:
+  upf:
+    access:
+      ip: "10.92.4.4/25"
+      gateway: "10.92.4.126"
+    core:
+      ip: "10.92.4.132/25"
+      gateway: "10.92.4.254"
+    enb:
+      subnet: "10.92.3.128/25"
+    cfgFiles:
+      upf.json:
+        cpiface:
+          enable_ue_ip_alloc: true
+          ue_ip_pool: "10.250.2.0/24"
+        qci_qos_config:
+          - qci: 0 # Fallback QCI
+            cbs: 50000
+            ebs: 50000
+            pbs: 50000
+            burst_duration_ms: 100
+            priority: 7

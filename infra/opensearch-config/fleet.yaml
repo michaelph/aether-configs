@@ -1,0 +1,13 @@
+name: opensearch-config
+defaultNamespace: logging-system
+helm:
+  releaseName: opensearch-config
+  repo: https://charts.aetherproject.org
+  chart: opensearch-setting
+  version: 0.1.5
+  values:
+    configuration:
+      setting_configmap: opensearch-kibana-setting
+      setting: settings/
+kustomize:
+  dir: ./kustomize

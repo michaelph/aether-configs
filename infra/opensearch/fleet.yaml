@@ -1,0 +1,14 @@
+name: opensearch
+defaultNamespace: logging-system
+helm:
+  releaseName: opensearch
+  repo: https://opensearch-project.github.io/helm-charts/
+  chart: opensearch
+  version: 1.8.0
+  values:
+    replicas: 1
+    persistence:
+      size: 100Gi
+rolloutStrategy:
+  maxUnavailable: "100%"
+  maxUnavailablePartitions: "100%"

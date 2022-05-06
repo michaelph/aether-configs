@@ -1,0 +1,9 @@
+name: bess-upf2
+defaultNamespace: aether-sdcore-upf2
+helm:
+  releaseName: bess-upf2
+  repo: https://charts.aetherproject.org
+  chart: bess-upf
+  version: 0.0.5
+  valuesFiles:
+    - values.yaml

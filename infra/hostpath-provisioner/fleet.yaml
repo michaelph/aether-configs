@@ -1,0 +1,10 @@
+name: hostpath-provisioner
+defaultNamespace: kube-system
+helm:
+  chart: hostpath-provisioner
+  repo: https://charts.rimusz.net
+  version: 0.2.13
+  releaseName: hostpath-provisioner
+  values:
+    storageClass:
+      name: hostpath

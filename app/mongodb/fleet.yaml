@@ -1,0 +1,16 @@
+name: mongodb
+defaultNamespace: aether-sdcore-5g
+helm:
+  releaseName: mongodb
+  chart: mongodb
+  repo: https://charts.bitnami.com/bitnami
+  values:
+    fullnameOverride: mongodb
+    persistence:
+      enabled: true
+    architecture: replicaset
+    replicaCount: 1
+    auth:
+      enabled: false
+    serviceAccount:
+      create: false

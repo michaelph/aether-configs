@@ -1,0 +1,7 @@
+[
+    {
+        "file": "log_rotation.json",
+        "type": "PUT",
+        "url": "_plugins/_ism/policies/log_rotation"
+    }
+]

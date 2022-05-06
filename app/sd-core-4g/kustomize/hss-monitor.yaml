@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hss
+  namespace: aether-sdcore-4g
+spec:
+  endpoints:
+    - path: /metrics
+      port: prometheus-exporter
+  namespaceSelector:
+    matchNames:
+      - aether-sdcore-4g
+  selector:
+    matchLabels:
+      app: hss

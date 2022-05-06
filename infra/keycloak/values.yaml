@@ -1,0 +1,281 @@
+global:
+  storageClass: hostpath
+auth:
+  adminUser: admin
+  adminPassword: adminpassword
+  managementPassword: adminpassword
+postgresql:
+  auth:
+    postgresPassword: adminpassword
+    username: postgres
+    password: adminpassword
+  persistence:
+    enabled: true
+    storageClass: hostpath
+  primary:
+    extendedConfiguration: |
+      huge_pages = off
+    extraVolumeMounts:
+      - name: pg-sample-config
+        mountPath: /opt/bitnami/postgresql/share/postgresql.conf.sample
+        subPath: postgresql.conf.sample
+    extraVolumes:
+      - configMap:
+          name: pg-sample-config
+        name: pg-sample-config
+  postgresqlExtendedConf:
+    huge_pages: off
+service:
+  type: ClusterIP
+keycloakConfigCli:
+  enabled: true
+  configuration:
+    aether.json: |
+      {
+        "realm": "aether",
+        "enabled": true,
+        "displayNameHtml": "<img src='https://opennetworking.org/wp-content/uploads/2020/02/aether-logo.png'></img>",
+        "clientScopes": [
+          {
+            "name": "groups",
+            "description": "Groups scope",
+            "protocol": "openid-connect",
+            "attributes": {
+              "include.in.token.scope": "true",
+              "display.on.consent.screen": "true"
+            },
+            "protocolMappers": [
+              {
+                "name": "Groups Mapper",
+                "protocol": "openid-connect",
+                "protocolMapper": "oidc-group-membership-mapper",
+                "consentRequired": false,
+                "config": {
+                  "full.path": "false",
+                  "id.token.claim": "true",
+                  "access.token.claim": "true",
+                  "claim.name": "groups",
+                  "userinfo.token.claim": "true"
+                }
+              }
+            ]
+          }
+        ],
+        "clients": [
+          {
+            "clientId": "aether-roc-gui",
+            "name": "Aether ROC GUI",
+            "enabled": true,
+            "protocol": "openid-connect",
+            "clientAuthenticatorType": "public",
+            "redirectUris": [
+              "*"
+            ],
+            "webOrigins": [
+              "*"
+            ],
+            "fullScopeAllowed": false,
+            "defaultClientScopes": [
+              "profile",
+              "email",
+              "groups",
+              "roles",
+              "web-origins"
+            ],
+            "optionalClientScopes": [
+              "address",
+              "microprofile-jwt",
+              "offline_access",
+              "phone"
+            ],
+            "protocolMappers": [
+              {
+                "name": "GUI Group Mapper",
+                "protocol": "openid-connect",
+                "protocolMapper": "oidc-group-membership-mapper",
+                "consentRequired": false,
+                "config": {
+                  "full.path": "false",
+                  "id.token.claim": "true",
+                  "access.token.claim": "true",
+                  "claim.name": "groups",
+                  "userinfo.token.claim": "true"
+                }
+              }
+            ]
+          },
+          {
+            "clientId": "grafana",
+            "name": "Aether Grafana",
+            "enabled": true,
+            "protocol": "openid-connect",
+            "publicClient": false,
+            "clientAuthenticatorType": "client-secret",
+            "secret": "a0953d48-706f-4709-89f5-b873ac8e6cec",
+            "redirectUris": [
+              "*"
+            ],
+            "webOrigins": [
+              "*"
+            ],
+            "fullScopeAllowed": false,
+            "bearerOnly": false,
+            "serviceAccountsEnabled": true,
+            "authorizationServicesEnabled": true,
+            "defaultClientScopes": [
+              "web-origins",
+              "profile",
+              "roles",
+              "groups",
+              "email"
+            ],
+            "protocolMappers": [
+              {
+                "name": "groups",
+                "protocol": "openid-connect",
+                "protocolMapper": "oidc-group-membership-mapper",
+                "consentRequired": false,
+                "config": {
+                  "full.path": "true",
+                  "id.token.claim": "true",
+                  "access.token.claim": "true",
+                  "claim.name": "groups",
+                  "userinfo.token.claim": "true"
+                }
+              },
+              {
+                "name": "Client ID",
+                "protocol": "openid-connect",
+                "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                "consentRequired": false,
+                "config": {
+                  "user.session.note": "clientId",
+                  "id.token.claim": "true",
+                  "access.token.claim": "true",
+                  "claim.name": "clientId",
+                  "jsonType.label": "String"
+                }
+              },
+              {
+                "name": "Client Host",
+                "protocol": "openid-connect",
+                "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                "consentRequired": false,
+                "config": {
+                  "user.session.note": "clientHost",
+                  "id.token.claim": "true",
+                  "access.token.claim": "true",
+                  "claim.name": "clientHost",
+                  "jsonType.label": "String"
+                }
+              },
+              {
+                "name": "Client IP Address",
+                "protocol": "openid-connect",
+                "protocolMapper": "oidc-usersessionmodel-note-mapper",
+                "consentRequired": false,
+                "config": {
+                  "user.session.note": "clientAddress",
+                  "id.token.claim": "true",
+                  "access.token.claim": "true",
+                  "claim.name": "clientAddress",
+                  "jsonType.label": "String"
+                }
+              }
+            ]
+          }
+        ],
+        "groups": [
+          {
+            "name": "ONFStaff",
+            "path": "/ONFStaff"
+          },
+          {
+            "name": "AetherROCAdmin",
+            "path": "/AetherROCAdmin"
+          },
+          {
+            "name": "EnterpriseAdmin",
+            "path": "/EnterpriseAdmin"
+          },
+          {
+            "name": "ase-enterprise",
+            "path": "/ase-enterprise"
+          }
+        ],
+        "users": [
+          {
+            "username": "onfadmin",
+            "enabled": true,
+            "firstName": "ONF",
+            "lastName": "Admin",
+            "email": "support@opennetworking.org",
+            "emailVerified": true,
+            "groups": [
+              "AetherROCAdmin",
+              "ONFStaff"
+            ],
+            "credentials": [
+              {
+                "type": "password",
+                "value": "changeme"
+              }
+            ]
+          },
+          {
+            "username": "alicea",
+            "enabled": true,
+            "firstName": "Alice",
+            "lastName": "Admin",
+            "email": "alicea@opennetworking.org",
+            "emailVerified": true,
+            "groups": [
+              "AetherROCAdmin"
+            ],
+            "credentials": [
+              {
+                "type": "password",
+                "value": "changeme"
+              }
+            ]
+          },
+          {
+            "username": "daisyd",
+            "enabled": true,
+            "firstName": "Daisy",
+            "lastName": "Duke",
+            "email": "daisyd@opennetworking.org",
+            "emailVerified": true,
+            "groups": [
+              "EnterpriseAdmin",
+              "ase-enterprise"
+            ],
+            "credentials": [
+              {
+                "type": "password",
+                "value": "changeme"
+              }
+            ]
+          },
+          {
+            "username": "elmerf",
+            "enabled": true,
+            "firstName": "Elmer",
+            "lastName": "Fudd",
+            "email": "elmerf@opennetworking.org",
+            "emailVerified": true,
+            "groups": [
+              "ase-enterprise"
+            ],
+            "credentials": [
+              {
+                "type": "password",
+                "value": "changeme"
+              }
+            ]
+          }
+        ]
+      }
+ingress:
+  enabled: true
+  hostname: keycloak.aetherproject.net

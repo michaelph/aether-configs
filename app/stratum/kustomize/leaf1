@@ -1,0 +1,84 @@
+description: "Stratum Chassis Config for leaf1 (Edgecore Wedge100BF-65x)"
+chassis {
+  platform: PLT_GENERIC_BAREFOOT_TOFINO
+  name: "leaf1"
+}
+nodes {
+  id: 1
+  slot: 1
+  index: 1
+}
+singleton_ports {
+  id: 12
+  name: "12/0"
+  slot: 1
+  port: 12
+  speed_bps: 40000000000
+  config_params {
+    admin_state: ADMIN_STATE_ENABLED
+    autoneg: TRI_STATE_FALSE
+  }
+  node: 1
+}
+singleton_ports {
+  id: 11
+  name: "11/0"
+  slot: 1
+  port: 11
+  speed_bps: 40000000000
+  config_params {
+    admin_state: ADMIN_STATE_ENABLED
+    autoneg: TRI_STATE_FALSE
+  }
+  node: 1
+}
+singleton_ports {
+  id: 10
+  name: "10/0"
+  slot: 1
+  port: 10
+  speed_bps: 40000000000
+  config_params {
+    admin_state: ADMIN_STATE_ENABLED
+    autoneg: TRI_STATE_FALSE
+  }
+  node: 1
+}
+singleton_ports {
+  id: 9
+  name: "9/0"
+  slot: 1
+  port: 9
+  speed_bps: 40000000000
+  config_params {
+    admin_state: ADMIN_STATE_ENABLED
+    autoneg: TRI_STATE_FALSE
+  }
+  node: 1
+}
+singleton_ports {
+  id: 700
+  name: "7/0"
+  slot: 1
+  port: 7
+  channel: 1
+  speed_bps: 10000000000
+  config_params {
+    admin_state: ADMIN_STATE_ENABLED
+    autoneg: TRI_STATE_FALSE
+  }
+  node: 1
+}
+singleton_ports {
+  id: 200
+  name: "2/0"
+  slot: 1
+  port: 2
+  channel: 1
+  speed_bps: 10000000000
+  config_params {
+    admin_state: ADMIN_STATE_ENABLED
+    autoneg: TRI_STATE_FALSE
+  }
+  node: 1
+}

@@ -1,0 +1,4 @@
+resources:
+  - hss-monitor.yaml
+  - spgwc-monitor.yaml
+  - mme-monitor.yaml

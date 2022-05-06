@@ -1,0 +1,16 @@
+pfcp-agent:
+  config:
+    pfcp:
+      cfgFiles:
+        upf.json:
+          cpiface:
+            hostname: "pfcp-agent"
+            ue_ip_pool: "10.250.0.0/24"
+            dnn: "internet-p4"
+          p4rtciface:
+            access_ip: "10.92.3.254/32"
+import:
+  onos-classic:
+    enabled: false
+  stratum:
+    enabled: false

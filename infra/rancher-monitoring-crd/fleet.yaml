@@ -1,0 +1,16 @@
+name: rancher-monitoring-crd
+defaultNamespace: cattle-monitoring-system
+helm:
+  releaseName: rancher-monitoring-crd
+  repo: https://charts.rancher.io
+  chart: rancher-monitoring-crd
+  version: 100.1.0+up19.0.3
+diff:
+  comparePatches:
+    - apiVersion: batch/v1
+      kind: Job
+      operations:
+        - {"op":"replace", "path":"/metadata/annotations/helm.sh~1hook-delete-policy", "value":"before-hook-creation,hook-succeeded"}
+rolloutStrategy:
+  maxUnavailable: 100%
+  maxUnavailablePartitions: 100%

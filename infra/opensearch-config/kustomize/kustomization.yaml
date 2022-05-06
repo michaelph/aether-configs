@@ -1,0 +1,7 @@
+configMapGenerator:
+  - name: opensearch-kibana-setting
+    files:
+      - settings/config.json
+      - settings/log_rotation.json
+generatorOptions:
+  disableNameSuffixHash: true

@@ -1,0 +1,64 @@
+{
+    "policy": {
+        "policy_id": "log_rotation",
+        "description": "A simple default policy that changes the replica count between hot and cold states.",
+        "last_updated_time": 1645729879545,
+        "schema_version": 12,
+        "error_notification": null,
+        "default_state": "hot",
+        "states": [
+            {
+                "name": "hot",
+                "actions": [
+                    {
+                        "replica_count": {
+                            "number_of_replicas": 1
+                        }
+                    }
+                ],
+                "transitions": [
+                    {
+                        "state_name": "cold",
+                        "conditions": {
+                            "min_index_age": "7d"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "cold",
+                "actions": [
+                    {
+                        "read_only": {}
+                    }
+                ],
+                "transitions": [
+                    {
+                        "state_name": "delete",
+                        "conditions": {
+                            "min_index_age": "23d"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "delete",
+                "actions": [
+                    {
+                        "delete": {}
+                    }
+                ],
+                "transitions": []
+            }
+        ],
+        "ism_template": [
+            {
+                "index_patterns": [
+                    "fluentbit*"
+                ],
+                "priority": 1,
+                "last_updated_time": 1645729879545
+            }
+        ]
+    }
+}

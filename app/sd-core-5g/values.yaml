@@ -1,0 +1,201 @@
+5g-control-plane:
+  enable5G: true
+  resources:
+    enabled: false
+  mongodb:
+    deploy: false
+  config:
+    managedByConfigPod:
+      enabled: true
+      syncUrl: "http://sdcore-adapter-v2.aether-roc:8080/synchronize"
+    logger:
+      # network function
+      AMF:
+        debugLevel: debug
+        ReportCaller: true
+      SMF:
+        debugLevel: debug
+        ReportCaller: true
+      UDR:
+        debugLevel: debug
+        ReportCaller: true
+      UDM:
+        debugLevel: debug
+        ReportCaller: true
+      NRF:
+        debugLevel: debug
+        ReportCaller: true
+      PCF:
+        debugLevel: debug
+        ReportCaller: true
+      AUSF:
+        debugLevel: debug
+        ReportCaller: true
+      N3IWF:
+        debugLevel: debug
+        ReportCaller: true
+      # library
+      NAS:
+        debugLevel: debug
+        ReportCaller: true
+      FSM:
+        debugLevel: debug
+        ReportCaller: true
+      NGAP:
+        debugLevel: debug
+        ReportCaller: true
+      NamfComm:
+        debugLevel: debug
+        ReportCaller: true
+      NamfEventExposure:
+        debugLevel: debug
+        ReportCaller: true
+      NsmfPDUSession:
+        debugLevel: debug
+        ReportCaller: true
+      NudrDataRepository:
+        debugLevel: debug
+        ReportCaller: true
+      OpenApi:
+        debugLevel: debug
+        ReportCaller: true
+      Aper:
+        debugLevel: info
+        ReportCaller: true
+      CommonConsumerTest:
+        debugLevel: debug
+        ReportCaller: true
+      PFCP:
+        debugLevel: debug
+        ReportCaller: true
+      MongoDBLibrary:
+        debugLevel: debug
+        ReportCaller: true
+      PathUtil:
+        debugLevel: debug
+        ReportCaller: true
+      # webui
+      WEBUI:
+        debugLevel: debug
+        ReportCaller: true
+    mongodb:
+      name: free5gc
+      url: mongodb://mongodb-arbiter-headless
+    amf:
+      ngapp:
+        externalIp: 10.92.2.168
+      cfgFiles:
+        amfcfg.conf:
+          configuration:
+            ngapIpList:
+              - "0.0.0.0"
+            servedGuamiList:
+              - plmnId:
+                  mcc: "315"
+                  mnc: "010"
+                amfId: f511b2
+            supportTaiList:
+              - plmnId:
+                  mcc: "315"
+                  mnc: "010"
+                tac: 1
+            plmnSupportList:
+              - plmnId:
+                  mcc: "315"
+                  mnc: "010"
+                snssaiList:
+                  - sst: 1
+                    sd: "010203"
+            supportDnnList:
+              - internet
+            security:
+              integrityOrder:
+                - NIA1
+              cipheringOrder:
+                - NEA0
+    smf:
+      cfgFiles:
+        smfcfg.conf:
+          configuration:
+            snssaiInfos:
+              - dnnInfos:
+                  - dnn: internet
+                    dns:
+                      ipv4: 8.8.8.8
+                    ueSubnet: 10.250.0.0/24
+                sNssai:
+                  sd: "010203"
+                  sst: 1
+    udm:
+      cfgFiles:
+        udmcfg.conf:
+          keys:
+            udmProfileAHNPublicKey: 5a8d38864820197c3394b92613b20b91633cbd897119273bf8e4a6f4eec0a650
+            udmProfileAHNPrivateKey: c53c22208b61860b06c62e5406a7b330c2b577aa5558981510d128247d38bd1d
+            udmProfileBHNPublicKey: 0472DA71976234CE833A6907425867B82E074D44EF907DFB4B3E21C1C2256EBCD15A7DED52FCBB097A4ED250E036C7B9C8C7004C4EEDC4F068CD7BF8D3F900E3B4
+            udmProfileBHNPrivateKey: F1AB1074477EBCC7F554EA1C5FC368B1616730155E0041AC447D6301975FECDA
+    pcf:
+      cfgFiles:
+        pcfcfg.conf:
+          info:
+            version: 1.0.0
+            description: PCF initial local configuration
+    nrf:
+      cfgFiles:
+        nrfcfg.conf:
+          configuration:
+            DefaultPlmnId:
+              mcc: "315"
+              mnc: "010"
+    nssf:
+      cfgFiles:
+        nssfcfg.conf:
+          configuration:
+            nsiList:
+              - nsiInformationList:
+                  - nrfId: http://nrf:29510/nnrf-nfm/v1/nf-instances
+                    nsiId: 22
+                snssai:
+                  sd: "010203"
+                  sst: 1
+            supportedNssaiInPlmnList:
+              - plmnId:
+                  mcc: "315"
+                  mnc: "010"
+                supportedSnssaiList:
+                  - sd: "010203"
+                    sst: 1
+            supportedPlmnList:
+              - mcc: "315"
+                mnc: "010"
+    ausf:
+      cfgFiles:
+        ausfcfg.conf:
+          configuration:
+            plmnSupportList:
+              - mcc: "315"
+                mnc: "010"
+
+omec-sub-provision:
+  config:
+    simapp:
+      podAnnotations:
+        field.cattle.io/workloadMetrics: ''
+      cfgFiles:
+        simapp.yaml:
+          configuration:
+            provision-network-slice: false
+            subscribers:
+              - ueId-start: 315010999912349
+                ueId-end: 315010999912355
+                plmnId: 315010
+                opc: 69d5c2eb2e2e624750541d3bbc692ba5
+                op: ""
+                key: 000102030405060708090a0b0c0d0e0f
+                sequenceNumber: 96
+
+omec-control-plane:
+  enable4G: false
+
+omec-user-plane:
+  enable: false

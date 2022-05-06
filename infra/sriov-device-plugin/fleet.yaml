@@ -1,0 +1,2 @@
+name: sriov-device-plugin
+defaultNamespace: kube-system

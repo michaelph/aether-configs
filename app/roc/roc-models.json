@@ -1,0 +1,382 @@
+{
+   "default-target": "connectivity-service-v2",
+   "Updates": {
+       "connectivity-services-2.0.0": {
+           "connectivity-service": [
+               {
+                   "core-5g-endpoint": "http://config4g.aether-sdcore-4g:5000/config",
+                   "display-name": "4G Connectivity Service",
+                   "connectivity-service-id": "ase-4g-cs"
+               },
+               {
+                   "core-5g-endpoint": "http://webui.aether-sdcore-5g:5000/config",
+                   "display-name": "5G Connectivity Service",
+                   "connectivity-service-id": "ase-5g-cs"
+               }
+           ]
+       },
+       "enterprises-2.0.0": {
+           "enterprise": [
+               {
+                   "connectivity-service": [
+                       {
+                           "connectivity-service": "ase-4g-cs",
+                           "enabled": true
+                       }
+                   ],
+                   "display-name": "4G Enterprise",
+                   "enterprise-id": "ase-4g-enterprise",
+                   "application": [],
+                   "site": [
+                       {
+                           "display-name": "4G Site",
+                           "site-id": "ase-4g-site",
+                           "imsi-definition": {
+                               "mcc": "315",
+                               "mnc": "010",
+                               "enterprise": 0,
+                               "format": "SSSSSSSSSSSSSSS"
+                           },
+                           "device": [
+                               {
+                                   "device-id": "ase-4g-ue-1",
+                                   "display-name": "4G Monitoring Pi 1",
+                                   "sim-card": "ase-4g-sim-1"
+                               },
+                               {
+                                   "device-id": "ase-4g-ue-2",
+                                   "display-name": "4G Camera 1",
+                                   "sim-card": "ase-4g-sim-2"
+                               },
+                               {
+                                   "device-id": "ase-4g-ue-3",
+                                   "display-name": "4G Camera 2",
+                                   "sim-card": "ase-4g-sim-3"
+                               }
+                           ],
+                           "sim-card": [
+                               {
+                                   "sim-id": "ase-4g-sim-1",
+                                   "display-name": "4G Sim 1",
+                                   "imsi": 315010999912341
+                               },
+                               {
+                                   "sim-id": "ase-4g-sim-2",
+                                   "display-name": "4G Sim 2",
+                                   "imsi": 315010999912342
+                               },
+                               {
+                                   "sim-id": "ase-4g-sim-3",
+                                   "display-name": "4G Sim 3",
+                                   "imsi": 315010999912343
+                               }
+                           ],
+                           "device-group": [
+                               {
+                                   "display-name": "4G Monitoring Pis",
+                                   "device-group-id": "ase-4g-device-group1",
+                                   "device": [
+                                       {
+                                           "device-id": "ase-4g-ue-1",
+                                           "enable": true
+                                       }
+                                   ],
+                                   "ip-domain": "ase-ip-pool-bess-upf1",
+                                   "mbr": {
+                                       "uplink": 500000000,
+                                       "downlink": 500000000
+                                   },
+                                   "traffic-class": "ase-4g-default-bearer"
+                               },
+                               {
+                                   "display-name": "4G Cameras",
+                                   "device-group-id": "ase-4g-device-group2",
+                                   "device": [
+                                       {
+                                           "device-id": "ase-4g-ue-2",
+                                           "enable": true
+                                       },
+                                       {
+                                           "device-id": "ase-4g-ue-3",
+                                           "enable": true
+                                       }
+                                   ],
+                                   "ip-domain": "ase-ip-pool-bess-upf2",
+                                   "mbr": {
+                                       "uplink": 500000000,
+                                       "downlink": 500000000
+                                   },
+                                   "traffic-class": "ase-4g-default-bearer"
+                               },
+                               {
+                                   "display-name": "4G Phones",
+                                   "device-group-id": "ase-4g-device-group3",
+                                   "device": [],
+                                   "ip-domain": "ase-ip-pool-bess-upf3",
+                                   "mbr": {
+                                       "uplink": 500000000,
+                                       "downlink": 500000000
+                                   },
+                                   "traffic-class": "ase-4g-default-bearer"
+                               }
+                           ],
+                           "ip-domain": [
+                               {
+                                   "admin-status": "ENABLE",
+                                   "display-name": "IP pool BESS UPF1",
+                                   "dnn": "internet1",
+                                   "dns-primary": "10.92.2.166",
+                                   "ip-domain-id": "ase-ip-pool-bess-upf1",
+                                   "mtu": 1460,
+                                   "subnet": "10.250.1.0/24"
+                               },
+                               {
+                                   "admin-status": "ENABLE",
+                                   "display-name": "IP pool BESS UPF2",
+                                   "dnn": "internet2",
+                                   "dns-primary": "10.92.2.166",
+                                   "ip-domain-id": "ase-ip-pool-bess-upf2",
+                                   "mtu": 1460,
+                                   "subnet": "10.250.2.0/24"
+                               },
+                               {
+                                   "admin-status": "ENABLE",
+                                   "display-name": "IP pool BESS UPF3",
+                                   "dnn": "internet3",
+                                   "dns-primary": "10.92.2.166",
+                                   "ip-domain-id": "ase-ip-pool-bess-upf3",
+                                   "mtu": 1460,
+                                   "subnet": "10.250.3.0/24"
+                               }
+                           ],
+                           "small-cell": [
+                               {
+                                   "small-cell-id": "enb1",
+                                   "display-name": "eNodeB 1",
+                                   "address": "ase-enb1",
+                                   "enable": true,
+                                   "tac": "0001"
+                               }
+                           ],
+                           "upf": [
+                               {
+                                   "address": "upf.aether-sdcore-upf1",
+                                   "display-name": "BESS UPF 1",
+                                   "upf-id": "ase-upf1",
+                                   "port": 8805,
+                                   "config-endpoint": "http://upf-http.aether-sdcore-upf1:8080"
+                               },
+                               {
+                                   "address": "upf.aether-sdcore-upf2",
+                                   "display-name": "BESS UPF 2",
+                                   "upf-id": "ase-upf2",
+                                   "port": 8805,
+                                   "config-endpoint": "http://upf-http.aether-sdcore-upf2:8080"
+                               },
+                               {
+                                   "address": "upf.aether-sdcore-upf3",
+                                   "display-name": "BESS UPF 3",
+                                   "upf-id": "ase-upf3",
+                                   "port": 8805,
+                                   "config-endpoint": "http://upf-http.aether-sdcore-upf3:8080"
+                               }
+                           ],
+                           "slice": [
+                               {
+                                   "default-behavior": "ALLOW-ALL",
+                                   "display-name": "4G Slice 1",
+                                   "device-group": [
+                                       {
+                                           "device-group": "ase-4g-device-group1",
+                                           "enable": true
+                                       }
+                                   ],
+                                   "filter": [],
+                                   "slice-id": "ase-4g-slice1",
+                                   "sd": 66051,
+                                   "sst": 1,
+                                   "upf": "ase-upf1",
+                                   "mbr": {
+                                       "uplink": 500000000,
+                                       "downlink": 500000000
+                                   },
+                                   "priority-traffic-rule": []
+                               },
+                               {
+                                   "default-behavior": "ALLOW-ALL",
+                                   "display-name": "4G Slice 2",
+                                   "device-group": [
+                                       {
+                                           "device-group": "ase-4g-device-group2",
+                                           "enable": true
+                                       }
+                                   ],
+                                   "filter": [],
+                                   "slice-id": "ase-4g-slice2",
+                                   "sd": 66051,
+                                   "sst": 1,
+                                   "upf": "ase-upf2",
+                                   "mbr": {
+                                       "uplink": 500000000,
+                                       "downlink": 500000000
+                                   },
+                                   "priority-traffic-rule": []
+                               },
+                               {
+                                   "default-behavior": "ALLOW-ALL",
+                                   "display-name": "4G Slice 3",
+                                   "device-group": [
+                                       {
+                                           "device-group": "ase-4g-device-group3",
+                                           "enable": true
+                                       }
+                                   ],
+                                   "filter": [],
+                                   "slice-id": "ase-4g-slice3",
+                                   "sd": 66051,
+                                   "sst": 1,
+                                   "upf": "ase-upf3",
+                                   "mbr": {
+                                       "uplink": 500000000,
+                                       "downlink": 500000000
+                                   },
+                                   "priority-traffic-rule": []
+                               }
+                           ]
+                       }
+                   ],
+                   "traffic-class": [
+                       {
+                           "display-name": "4G Default bearer QCI/ARP",
+                           "traffic-class-id": "ase-4g-default-bearer",
+                           "pdb": 300,
+                           "arp": 6,
+                           "pelr": 6,
+                           "qci": 9
+                       }
+                   ]
+               },
+               {
+                   "connectivity-service": [
+                       {
+                           "connectivity-service": "ase-5g-cs",
+                           "enabled": true
+                       }
+                   ],
+                   "display-name": "5G Enterprise",
+                   "enterprise-id": "ase-5g-enterprise",
+                   "application": [],
+                   "site": [
+                       {
+                           "display-name": "5G Site",
+                           "site-id": "ase-5g-site",
+                           "imsi-definition": {
+                               "mcc": "315",
+                               "mnc": "010",
+                               "enterprise": 0,
+                               "format": "SSSSSSSSSSSSSSS"
+                           },
+                           "device": [
+                               {
+                                   "device-id": "ase-5g-ue-1",
+                                   "display-name": "5G Monitoring Pi 1",
+                                   "sim-card": "ase-5g-sim-1"
+                               }
+                           ],
+                           "sim-card": [
+                               {
+                                   "sim-id": "ase-5g-sim-1",
+                                   "display-name": "5G Sim 1",
+                                   "imsi": 315010999912349
+                               }
+                           ],
+                           "device-group": [
+                               {
+                                   "display-name": "5G Monitoring Pis",
+                                   "device-group-id": "ase-5g-device-group1",
+                                   "device": [
+                                       {
+                                           "device-id": "ase-5g-ue-1",
+                                           "enable": true
+                                       }
+                                   ],
+                                   "ip-domain": "ase-ip-pool-p4-upf1",
+                                   "mbr": {
+                                       "uplink": 500000000,
+                                       "downlink": 500000000
+                                   },
+                                   "traffic-class": "ase-5g-default-bearer"
+                               }
+                           ],
+                           "ip-domain": [
+                               {
+                                   "admin-status": "ENABLE",
+                                   "display-name": "IP pool P4 UPF1",
+                                   "dnn": "internet-p4",
+                                   "dns-primary": "10.92.2.166",
+                                   "ip-domain-id": "ase-ip-pool-p4-upf1",
+                                   "mtu": 1460,
+                                   "subnet": "10.250.0.0/24"
+                               }
+                           ],
+                           "small-cell": [
+                               {
+                                   "small-cell-id": "gnb1",
+                                   "display-name": "gNodeB 1",
+                                   "address": "ase-gnb1",
+                                   "enable": true,
+                                   "tac": "0001"
+                               }
+                           ],
+                           "upf": [
+                               {
+                                   "address": "pfcp-agent.tost",
+                                   "display-name": "P4 UPF 1",
+                                   "upf-id": "ase-p4-upf1",
+                                   "port": 8805
+                               }
+                           ],
+                           "slice": [
+                               {
+                                   "default-behavior": "ALLOW-ALL",
+                                   "display-name": "5G Slice 1",
+                                   "device-group": [
+                                       {
+                                           "device-group": "ase-5g-device-group1",
+                                           "enable": true
+                                       }
+                                   ],
+                                   "filter": [],
+                                   "slice-id": "ase-5g-slice1",
+                                   "sd": 66051,
+                                   "sst": 1,
+                                   "upf": "ase-p4-upf1",
+                                   "mbr": {
+                                       "uplink": 500000000,
+                                       "downlink": 500000000
+                                   },
+                                   "priority-traffic-rule": []
+                               }
+                           ]
+                       }
+                   ],
+                   "traffic-class": [
+                       {
+                           "display-name": "5G Default bearer QCI/ARP",
+                           "traffic-class-id": "ase-5g-default-bearer",
+                           "pdb": 300,
+                           "arp": 6,
+                           "pelr": 6,
+                           "qci": 9
+                       }
+                   ]
+               }
+           ]
+       }
+   },
+   "Deletes": {},
+   "Extensions": {
+       "model-version-101": "2.0.0",
+       "model-type-102": "Aether"
+   }
+}

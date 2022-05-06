@@ -1,0 +1,9 @@
+configmapGenerator:
+  - name: grafana-ops-dashboards-dashboards
+    namespace: cattle-dashboards
+    files:
+      - dashboards/subscriber-metrics.json
+      - dashboards/upf-dashboard.json
+    options:
+      labels:
+        grafana_dashboard: "1"

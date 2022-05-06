@@ -1,0 +1,11 @@
+name: keycloak
+defaultNamespace: aether-keycloak
+helm:
+  releaseName: keycloak
+  chart: keycloak
+  repo: https://charts.bitnami.com/bitnami
+  version: 7.1.7
+  valuesFiles:
+    - values.yaml
+kustomize:
+  dir: ./kustomize

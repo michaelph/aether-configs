@@ -1,0 +1,2 @@
+name: sealed-secret-controller
+defaultNamespace: kube-system

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: roc
+spec:
+  rules:
+    - host: roc.aetherproject.net
+      http:
+        paths:
+          - backend:
+              serviceName: aether-roc-gui-v2-external
+              servicePort: 80
+            path: /
+            pathType: Prefix
+          - backend:
+              serviceName: roc-grafana
+              servicePort: 80
+            path: /grafana
+            pathType: Prefix

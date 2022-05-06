@@ -1,0 +1,164 @@
+image:
+  credential: null
+
+onos-classic:
+  image:
+    repository: registry.opennetworking.org/docker.io/opennetworking/sdfabric-onos
+  replicas: 1
+  atomix:
+    replicas: 1
+  config:
+    netcfg: >
+      {
+        "devices": {
+          "device:leaf1": {
+            "segmentrouting": {
+              "ipv4NodeSid": 34,
+              "ipv4Loopback": "10.92.2.34",
+              "routerMac": "00:00:0A:5C:02:22",
+              "isEdgeRouter": true,
+              "adjacencySids": []
+            },
+            "basic": {
+              "name": "leaf1",
+              "managementAddress": "grpc://10.92.2.34:9339?device_id=1",
+              "driver": "stratum-tofino",
+              "pipeconf": "org.stratumproject.fabric-upf-int.montara_sde_9_7_0",
+              "locType": "grid",
+              "gridX": 300,
+              "gridY": 600
+            }
+          }
+        },
+        "ports": {
+          "device:leaf1/12": {
+            "interfaces": [
+              {
+                "ips": [
+                  "10.92.3.126/25"
+                ],
+                "vlan-untagged": 51,
+                "name": "mgmt-enp65s0f1"
+              }
+            ]
+          },
+          "device:leaf1/11": {
+            "interfaces": [
+              {
+                "ips": [
+                  "10.92.3.126/25",
+                  "10.92.4.126/25",
+                  "10.92.4.254/25"
+                ],
+                "vlan-untagged": 51,
+                "name": "node3-enp65s0f1"
+              }
+            ]
+          },
+          "device:leaf1/10": {
+            "interfaces": [
+              {
+                "ips": [
+                  "10.92.3.126/25",
+                  "10.92.4.126/25",
+                  "10.92.4.254/25"
+                ],
+                "vlan-untagged": 51,
+                "name": "node2-enp65s0f1"
+              }
+            ]
+          },
+          "device:leaf1/9": {
+            "interfaces": [
+              {
+                "ips": [
+                  "10.92.3.126/25",
+                  "10.92.4.126/25",
+                  "10.92.4.254/25"
+                ],
+                "vlan-untagged": 51,
+                "name": "node1-enp65s0f1"
+              }
+            ]
+          },
+          "device:leaf1/200": {
+            "interfaces": [
+              {
+                "ips": [
+                  "10.92.3.254/25"
+                ],
+                "vlan-untagged": 51,
+                "name": "eNB1"
+              }
+            ]
+          },
+          "device:leaf1/700": {
+            "interfaces": [
+              {
+                "ips": [
+                  "10.92.3.254/25"
+                ],
+                "vlan-untagged": 51,
+                "name": "gNB1"
+              }
+            ]
+          }
+        },
+        "hosts": {
+          "00:00:00:00:00:00/None": {
+            "basic": {
+              "allowed": false
+            }
+          }
+        },
+        "apps": {
+          "org.omecproject.up4": {
+            "up4": {
+              "devices": ["device:leaf1"],
+              "pscEncapEnabled": true
+            }
+          },
+          "org.onosproject.route-service": {
+            "routes": [
+              {
+                "prefix": "0.0.0.0/0",
+                "nextHop": "10.92.3.1"
+              },
+              {
+                "prefix": "10.250.1.0/24",
+                "nextHop": "10.92.4.131"
+              },
+              {
+                "prefix": "10.250.2.0/24",
+                "nextHop": "10.92.4.132"
+              },
+              {
+                "prefix": "10.250.3.0/24",
+                "nextHop": "10.92.4.133"
+              }
+            ]
+          },
+          "org.onosproject.dhcprelay": {
+            "default": [
+              {
+                "dhcpServerConnectPoint": "device:leaf1/12",
+                "serverIps": [
+                  "10.92.3.1"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    componentConfig:
+      "org.onosproject.net.host.impl.HostManager": >
+        {
+          "monitorHosts": "true",
+          "probeRate": "10000"
+        }
+
+import:
+  stratum:
+    enabled: false
+  pfcp-agent:
+    enabled: false

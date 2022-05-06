@@ -1,0 +1,94 @@
+global:
+  storage:
+    controller: "atomix-controller.kube-system:5679"
+  store:
+    consensus:
+      enabled: true
+      clusters: 1
+      replicas: 1
+      partitions: 1
+      persistence:
+        storageClass: "hostpath"
+        storageSize: 25Gi
+import:
+  aether-roc-gui:
+    v3:
+      enabled: false
+    v4:
+      enabled: false
+  sdcore-adapter:
+    v3:
+      enabled: false
+    v4:
+      enabled: false
+  sdcore-test-dummy:
+    enabled: false
+  prometheus:
+    acc:
+      enabled: false
+    amp:
+      enabled: false
+    ace:
+      enabled: false
+  demo-exporter:
+    enabled: false
+onos-gui:
+  ingress:
+    enabled: false
+  service:
+    type: ClusterIP
+aether-roc-api:
+  openidc:
+    issuer: http://keycloak.aether-keycloak/auth/realms/aether
+  websocketsidecar:
+    enabled: false
+aether-roc-gui-v2:
+  ingress:
+    enabled: false
+  service:
+    type: ClusterIP
+  grafana:
+    service: roc-grafana
+    port: 3000
+  prometheus:
+    site:
+      - name: ase-site
+        service: rancher-monitoring-prometheus.cattle-monitoring-system
+        protocol: http
+        port: 9090
+  openidc:
+    issuer: http://keycloak.aetherproject.net/auth/realms/aether
+grafana:
+  rbac:
+    namespaced: true
+  source:
+    - name: acc
+      protocol: http
+      service: prom-label-proxy-acc
+      port: 8080
+    - name: amp
+      protocol: http
+      service: prom-label-proxy-amp
+      port: 8080
+    - name: ase-site
+      protocol: http
+      service: rancher-monitoring-prometheus.cattle-monitoring-system
+      port: 9090
+  grafana.ini:
+    server:
+      domain: roc.aetherproject.net
+      protocol: http
+      root_url: "http://%(domain)s/grafana"
+onos-config:
+  openpolicyagent:
+    regoConfigMap: roc-opa-rbac
+  openidc:
+    issuer: http://keycloak.aether-keycloak/auth/realms/aether
+prom-label-proxy-acc:
+  config:
+    upstream: http://rancher-monitoring-prometheus.cattle-monitoring-system:9090
+prom-label-proxy-amp:
+  config:
+    upstream: http://rancher-monitoring-prometheus.cattle-monitoring-system:9090
+sdcore-adapter-v2:
+  partialUpdateEnabled: true

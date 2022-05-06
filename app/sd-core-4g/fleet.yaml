@@ -1,0 +1,11 @@
+name: sd-core-4g
+defaultNamespace: aether-sdcore-4g
+helm:
+  releaseName: sd-core-4g
+  chart: sd-core
+  repo: https://charts.aetherproject.org
+  version: 0.10.21
+  valuesFiles:
+    - values.yaml
+kustomize:
+  dir: ./kustomize

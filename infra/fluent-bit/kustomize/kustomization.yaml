@@ -1,0 +1,9 @@
+resources:
+  - ./base
+configMapGenerator:
+  - name: fluent-bit-config
+    files:
+      - custom_parsers.conf
+    behavior: merge
+generatorOptions:
+  disableNameSuffixHash: true

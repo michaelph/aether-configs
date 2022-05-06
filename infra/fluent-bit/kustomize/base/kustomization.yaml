@@ -1,0 +1,9 @@
+resources:
+  - opensearch-generic-oauth-sealed-secret.yaml
+
+configMapGenerator:
+  - name: fluent-bit-config
+    files:
+      - fluent-bit.conf
+generatorOptions:
+  disableNameSuffixHash: true

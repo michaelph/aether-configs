@@ -1,0 +1,39 @@
+name: fluent-bit
+defaultNamespace: logging-system
+helm:
+  releaseName: fluent-bit
+  repo: https://fluent.github.io/helm-charts
+  chart: fluent-bit
+  version: 0.12.3
+  values:
+    image:
+      repository: fluent/fluent-bit
+      tag: 1.7.1
+      pullPolicy: IfNotPresent
+    tolerations:
+      - effect: NoSchedule
+        value: switch
+        key: node-role.aetherproject.org
+      - effect: NoSchedule
+        value: oaiue
+        key: node-role.aetherproject.org
+      - effect: NoSchedule
+        value: oaienb
+        key: node-role.aetherproject.org
+    existingConfigMap: fluent-bit-config
+    env:
+      - name: MY_ES_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: opensearch-basic-auth
+            key: username
+      - name: MY_ES_PASSWD
+        valueFrom:
+          secretKeyRef:
+            name: opensearch-basic-auth
+            key: password
+kustomize:
+  dir: ./kustomize
+rolloutStrategy:
+  maxUnavailable: "100%"
+  maxUnavailablePartitions: "100%"

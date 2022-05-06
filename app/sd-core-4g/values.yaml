@@ -1,0 +1,76 @@
+omec-control-plane:
+  enable4G: true
+  cassandra:
+    deploy: false
+  resources:
+    enabled: true
+  config:
+    managedByConfigPod:
+      enabled: true
+      syncUrl: "http://sdcore-adapter-v2.aether-roc:8080/synchronize"
+    config4g:
+      deploy: true
+      podAnnotations:
+        field.cattle.io/workloadMetrics: ''
+    spgwc:
+      cfgFiles:
+        subscriber_mapping.json: {}
+    mme:
+      externalIP: 10.92.2.167
+      serviceType: ClusterIP
+      cfgFiles:
+        config.json:
+          mme:
+            logging: debug
+            mcc:
+              dig1: 3
+              dig2: 1
+              dig3: 5
+            mnc:
+              dig1: 0
+              dig2: 1
+              dig3: 0
+            plmnlist:
+              plmn1: "mcc=315,mnc=010"
+            apnlist:
+              internet: "spgwc"
+          s6a:
+            host_type: "freediameter"
+            host: "hss.aether-sdcore-4g.svc.cluster.local"
+            realm: "aether-sdcore-4g.svc.cluster.local"
+    hss:
+      deploy: true
+      acl:
+        oldTls: "*.cluster.local"
+      bootstrap:
+        enabled: true
+        users: {}
+        mmes:
+          - id: 1
+            mme_identity: "mme.aether-sdcore-4g.svc.cluster.local"
+            mme_realm: "aether-sdcore-4g.svc.cluster.local"
+            isdn: "19136246000"
+            unreachability: 1
+omec-sub-provision:
+  config:
+    simapp:
+      podAnnotations:
+        field.cattle.io/workloadMetrics: ''
+      cfgFiles:
+        simapp.yaml:
+          configuration:
+            provision-network-slice: false
+            sub-provision-endpt:
+              addr: config4g
+              port: 5000
+            subscribers:
+              - ueId-start: 315010999912341
+                ueId-end: 315010999912348
+                plmnId: 315010
+                opc: 69d5c2eb2e2e624750541d3bbc692ba5
+                key: 000102030405060708090a0b0c0d0e0f
+                sequenceNumber: 135
+omec-user-plane:
+  enable: false
+5g-control-plane:
+  enable5G: false

@@ -1,0 +1,15 @@
+name: roc
+defaultNamespace: aether-roc
+helm:
+  releaseName: roc
+  chart: aether-roc-umbrella
+  repo: https://charts.aetherproject.org
+  version: 2.0.43
+  valuesFiles:
+    - values.yaml
+kustomize:
+  dir: ./kustomize
+dependsOn:
+  - name: atomix-controller
+  - name: atomix-raft-storage
+  - name: onos-operator

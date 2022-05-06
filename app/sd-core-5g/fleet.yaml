@@ -1,0 +1,9 @@
+name: sd-core-5g
+defaultNamespace: aether-sdcore-5g
+helm:
+  releaseName: sd-core-5g
+  chart: sd-core
+  repo: https://charts.aetherproject.org
+  version: 0.10.18
+  valuesFiles:
+    - values.yaml

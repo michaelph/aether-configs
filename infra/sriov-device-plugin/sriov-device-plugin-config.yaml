@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sriovdp-config
+data:
+  config.json: |
+    {
+      "resourceList": [
+        {
+          "resourcePrefix": "intel.com",
+          "resourceName": "intel_sriov_netdevice",
+          "selectors": {
+            "vendors": ["8086"],
+            "drivers": ["iavf"]
+          }
+        },
+        {
+          "resourcePrefix": "intel.com",
+          "resourceName": "intel_sriov_vfio",
+          "selectors": {
+            "vendors": ["8086"],
+            "drivers": ["vfio-pci"]
+          }
+        },
+        {
+          "resourcePrefix": "mellanox.com",
+          "resourceName": "mellanox_sriov_netdevice",
+          "selectors": {
+            "vendors": ["15b3"],
+            "devices": ["1016", "1018", "101a", "101c"],
+            "drivers": ["mlx5_core"]
+          }
+        },
+        {
+          "resourcePrefix": "mellanox.com",
+          "resourceName": "mellanox_sriov_vfio",
+          "selectors": {
+            "vendors": ["15b3"],
+            "drivers": ["vfio-pci"]
+          }
+        }
+      ]
+    }

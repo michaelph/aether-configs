@@ -1,0 +1,73 @@
+name: prometheus-archive
+defaultNamespace: monitoring
+helm:
+  chart: prometheus
+  repo: https://prometheus-community.github.io/helm-charts
+  version: 14.4.1
+  releaseName: prometheus-archive
+  values:
+    server:
+      # persistentVolume:
+      #   existingClaim: prometheus-archive
+      #   subPath: prometheus-db
+      retention: "5y"
+    alertmanager:
+      enabled: false
+    kubeStateMetrics:
+      enabled: false
+    nodeExporter:
+      enabled: false
+    pushgateway:
+      enabled: false
+    serverFiles:
+      prometheus.yml:
+        scrape_configs:
+          - job_name: monitoring/edge-monitoring-server/0
+            honor_labels: false
+            kubernetes_sd_configs:
+              - role: endpoints
+                namespaces:
+                  names:
+                    - monitoring
+            metrics_path: /edges/metrics
+            scheme: HTTP
+            tls_config:
+              insecure_skip_verify: true
+            relabel_configs:
+              - action: keep
+                source_labels:
+                  - __meta_kubernetes_service_label_cattle_io_metrics
+                regex: a9cd26794a7bf600226f06ebb49c9e6b
+              - action: keep
+                source_labels:
+                  - __meta_kubernetes_endpoint_port_name
+                regex: metrics80
+              - source_labels:
+                  - __meta_kubernetes_endpoint_address_target_kind
+                  - __meta_kubernetes_endpoint_address_target_name
+                separator: ;
+                regex: Node;(.*)
+                replacement: ${1}
+                target_label: node
+              - source_labels:
+                  - __meta_kubernetes_endpoint_address_target_kind
+                  - __meta_kubernetes_endpoint_address_target_name
+                separator: ;
+                regex: Pod;(.*)
+                replacement: ${1}
+                target_label: pod
+              - source_labels:
+                  - __meta_kubernetes_namespace
+                target_label: namespace
+              - source_labels:
+                  - __meta_kubernetes_service_name
+                target_label: service
+              - source_labels:
+                  - __meta_kubernetes_pod_name
+                target_label: pod
+              - source_labels:
+                  - __meta_kubernetes_service_name
+                target_label: job
+                replacement: ${1}
+              - target_label: endpoint
+                replacement: metrics80

@@ -1,0 +1,20 @@
+name: cassandra
+defaultNamespace: aether-sdcore-4g
+helm:
+  releaseName: cassandra
+  chart: cassandra
+  repo: https://charts.helm.sh/incubator
+  version: 0.15.1
+  values:
+    fullnameOverride: cassandra
+    image:
+      tag: "2.1.20"
+    persistence:
+      enabled: true
+      storageClass: "hostpath"
+    config:
+      endpoint_snitch: GossipingPropertyFileSnitch
+      cluster_size: 1
+      seed_size: 1
+    podAnnotations:
+      fluentbit.io/parser: cassandra

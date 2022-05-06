@@ -1,0 +1,11 @@
+name: stratum
+defaultNamespace: tost
+helm:
+  releaseName: sdfabric-stratum
+  repo: https://charts.aetherproject.org
+  chart: sdfabric
+  version: 1.1.0
+  valuesFiles:
+    - values.yaml
+kustomize:
+  dir: ./kustomize

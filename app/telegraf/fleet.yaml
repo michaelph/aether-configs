@@ -1,0 +1,9 @@
+name: telegraf
+defaultNamespace: tost
+helm:
+  releaseName: sdfabric-telegraf
+  repo: https://charts.aetherproject.org
+  chart: tost-telegraf
+  version: 0.1.6
+  valuesFiles:
+    - values.yaml
