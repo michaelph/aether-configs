@@ -1,9 +1,9 @@
 resources:
-  - ./base
+  - opensearch-generic-oauth.yaml
 configMapGenerator:
   - name: fluent-bit-config
     files:
+      - fluent-bit.conf
       - custom_parsers.conf
-    behavior: merge
 generatorOptions:
   disableNameSuffixHash: true
