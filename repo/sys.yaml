@@ -1,0 +1,22 @@
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: system-services
+  namespace: fleet-default
+spec:
+  repo: https://github.com/opennetworkinglab/aether-configs
+  branch: main
+  paths:
+    - sys/sealed-secrets
+    - sys/rancher-monitoring-crd
+    - sys/rancher-monitoring
+    - sys/fluent-bit
+    - sys/opensearch
+    - sys/opensearch-dashboard
+    - sys/opensearch-config
+    - sys/hostpath-provisioner
+    - sys/metallb
+    - sys/keycloak
+    - sys/external-dns
+  targets:
+    - clusterSelector: {}

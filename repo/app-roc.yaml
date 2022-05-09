@@ -4,7 +4,7 @@ metadata:
   name: roc
   namespace: fleet-default
 spec:
-  repo: https://github.com/hyunsun/aether-configs
+  repo: https://github.com/opennetworkinglab/aether-configs
   branch: main
   paths:
     - infra/atomix-controller

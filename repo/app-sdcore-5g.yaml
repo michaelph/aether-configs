@@ -4,7 +4,7 @@ metadata:
   name: sdcore-5g
   namespace: fleet-default
 spec:
-  repo: https://github.com/hyunsun/aether-configs
+  repo: https://github.com/opennetworkinglab/aether-configs
   branch: main
   paths:
     - app/mongodb

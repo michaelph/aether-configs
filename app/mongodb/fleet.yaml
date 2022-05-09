@@ -8,8 +8,6 @@ helm:
     fullnameOverride: mongodb
     persistence:
       enabled: true
-    architecture: replicaset
-    replicaCount: 1
     auth:
       enabled: false
     serviceAccount:
