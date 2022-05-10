@@ -6,7 +6,7 @@ spec:
   rules:
     - host: roc.aetherproject.net
       http:
-        pathes:
+        paths:
           - path: /
             pathType: Prefix
             backend:
