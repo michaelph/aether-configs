@@ -3,6 +3,3 @@ defaultNamespace: kube-system
 helm:
   chart: https://charts.onosproject.org/onos-helm-charts/onos-operator/onos-operator-0.5.1.tgz
   releaseName: onos-operator
-  values:
-    global:
-      clusterDomain: global.fleet.clusterLabels.clusterDomain

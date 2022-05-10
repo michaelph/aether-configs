@@ -5,4 +5,3 @@ helm:
   releaseName: atomix-raft-storage
   values:
     scope: Cluster
-    clusterDomain: global.fleet.clusterLabels.clusterDomain
