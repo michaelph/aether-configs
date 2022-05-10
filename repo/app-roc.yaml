@@ -7,9 +7,9 @@ spec:
   repo: https://github.com/opennetworkinglab/aether-configs
   branch: main
   paths:
-    - infra/atomix-controller
-    - infra/atomix-raft-storage
-    - infra/onos-operator
+    - sys/atomix-controller
+    - sys/atomix-raft-storage
+    - sys/onos-operator
     - app/roc
   targets:
     - clusterSelector: {}
