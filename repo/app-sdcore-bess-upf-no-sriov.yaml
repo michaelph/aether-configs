@@ -1,0 +1,12 @@
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: sdcore-bess-upf
+  namespace: fleet-default
+spec:
+  repo: https://github.com/opennetworkinglab/aether-configs
+  branch: main
+  paths:
+    - app/bess-upf/no-sriov
+  targets:
+    - clusterSelector: {}
