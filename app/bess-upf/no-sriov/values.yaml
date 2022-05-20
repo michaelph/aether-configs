@@ -11,9 +11,11 @@ config:
     access:
       ip: "10.92.4.6/25"
       gateway: "10.92.4.126"
+      iface: enp1s0f0
     core:
       ip: "10.92.4.134/25"
       gateway: "10.92.4.254"
+      iface: enp1s0f0
     enb:
       subnet: "10.92.3.128/25"
     cfgFiles:
