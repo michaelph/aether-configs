@@ -1,6 +1,9 @@
 servicemonitor:
   enabled: true
 
+resources:
+  enabled: false
+
 config:
   upf:
     sriov:
@@ -20,8 +23,8 @@ config:
       subnet: "10.92.3.128/25"
     cfgFiles:
       upf.json:
+        mode: af_packet
         cpiface:
-          mode: af_packet
           enable_ue_ip_alloc: true
           ue_ip_pool: "10.250.4.0/24"
         qci_qos_config:
