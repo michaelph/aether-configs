@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: upf
+spec:
+  template:
+    spec:
+      containers:
+      - name: bessd
+        securityContext:
+          capabilities:
+            add:
+            - IPC_LOCK
+            - SYS_NICE

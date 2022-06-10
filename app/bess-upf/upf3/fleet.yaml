@@ -7,3 +7,5 @@ helm:
   version: 0.0.5
   valuesFiles:
     - values.yaml
+kustomize:
+  dir: ./kustomize
