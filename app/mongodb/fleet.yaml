@@ -8,6 +8,9 @@ helm:
     fullnameOverride: mongodb
     persistence:
       enabled: true
+      storageClass: hostpath
+    volumePermissions:
+      enabled: true
     auth:
       enabled: false
     serviceAccount:

@@ -80,7 +80,7 @@
         ReportCaller: true
     mongodb:
       name: free5gc
-      url: mongodb://mongodb-arbiter-headless
+      url: mongodb://mongodb
     amf:
       ngapp:
         externalIp: 10.92.2.168
