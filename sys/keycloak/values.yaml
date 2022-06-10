@@ -12,6 +12,8 @@ postgresql:
   persistence:
     enabled: true
     storageClass: hostpath
+  volumePermissions:
+    enabled: true
   primary:
     extendedConfiguration: |
       huge_pages = off
