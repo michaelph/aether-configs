@@ -9,7 +9,6 @@ spec:
   paths:
     - app/onos
     - app/stratum
-    - app/telegraf
     - app/pfcp-agent
   targets:
     - clusterSelector: {}
