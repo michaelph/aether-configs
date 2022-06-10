@@ -2,9 +2,6 @@ image:
   credential: false
 
 stratum:
-  image:
-    repository: registry.opennetworking.org/docker.io/stratumproject/stratum-bfrt
-
   nodeSelector:
     node-role.aetherproject.org: switch
 
