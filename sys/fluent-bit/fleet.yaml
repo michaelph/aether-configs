@@ -10,16 +10,6 @@ helm:
       repository: fluent/fluent-bit
       tag: 1.7.1
       pullPolicy: IfNotPresent
-    tolerations:
-      - effect: NoSchedule
-        value: switch
-        key: node-role.aetherproject.org
-      - effect: NoSchedule
-        value: oaiue
-        key: node-role.aetherproject.org
-      - effect: NoSchedule
-        value: oaienb
-        key: node-role.aetherproject.org
     existingConfigMap: fluent-bit-config
     env:
       - name: MY_ES_USERNAME
