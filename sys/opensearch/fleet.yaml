@@ -10,7 +10,7 @@ helm:
     persistence:
       labels:
         enabled: true
-        storageClassName: hostpath
+        storageClassName: default
       size: 10Gi
 rolloutStrategy:
   maxUnavailable: "100%"
