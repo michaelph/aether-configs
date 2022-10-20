@@ -8,7 +8,9 @@ helm:
   values:
     replicas: 1
     persistence:
-      size: 100Gi
+      labels:
+        storageClassName: hostpath
+      size: 10Gi
 rolloutStrategy:
   maxUnavailable: "100%"
   maxUnavailablePartitions: "100%"
