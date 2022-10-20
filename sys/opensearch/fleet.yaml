@@ -9,6 +9,7 @@ helm:
     replicas: 1
     persistence:
       labels:
+        enabled: true
         storageClassName: hostpath
       size: 10Gi
 rolloutStrategy:
