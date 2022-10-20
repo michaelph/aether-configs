@@ -4,7 +4,7 @@ metadata:
   name: sdcore-bess-upf
   namespace: fleet-default
 spec:
-  repo: https://github.com/opennetworkinglab/aether-configs
+  repo: https://github.com/michaelph/aether-configs
   branch: main
   paths:
     - app/bess-upf/no-sriov
