@@ -1,7 +1,7 @@
 name: atomix-raft-storage
 defaultNamespace: kube-system
 helm:
-  chart: https://github.com/atomix/atomix-helm-charts/releases/download/atomix-raft-storage-0.1.25/atomix-raft-storage-0.1.25.tgz
+  chart: https://github.com/atomix/atomix-helm-charts/releases/download/atomix-raft-storage-0.1.25/atomix-raft-storage-0.1.26.tgz
   releaseName: atomix-raft-storage
   values:
     scope: Cluster
