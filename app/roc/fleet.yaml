@@ -4,7 +4,7 @@ helm:
   releaseName: roc
   chart: aether-roc-umbrella
   repo: https://charts.aetherproject.org
-  version: 2.1.31
+  version: 2.0.48
   valuesFiles:
     - values.yaml
 kustomize:
